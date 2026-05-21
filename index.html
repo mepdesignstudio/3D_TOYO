@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MEP.24.172 TOYO R&D</title>
+    <title>TOYO 3D</title>
     <style>
         body {
             font-family: sans-serif;
@@ -9,24 +9,35 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 90vh; /* Changed to 90 to give room for logo */
+            height: 90vh;
             text-align: center;
             line-height: 1.6;
             margin: 0;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px; /* Widened slightly for better text flow */
             padding: 20px;
         }
         .logo {
-            max-width: 180px; /* Adjust this to change logo size */
+            max-width: 220px; 
             height: auto;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2rem;
             margin-bottom: 20px;
         }
-        a {
+        p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        /* This makes the link bigger and bolder */
+        .viewer-link {
             color: #0696d7;
             font-weight: bold;
             text-decoration: underline;
+            font-size: 1.4rem; /* Making it a "shy bit" bigger */
         }
     </style>
 </head>
@@ -35,12 +46,32 @@
     <div class="container">
         <img src="https://mepdesignstudio.com/images/mep-logo.png" alt="Company Logo" class="logo">
 
-        <h1>MEP.24.172 TOYO R&D 3D</h1>
-        <p>21.05.2026 - Ubačene su sprinkler magistrale - kolizije su vidljive u komentarima unutar linka</p>
+        <h1>MEP.24.172 TOYO R&D</h1>
         
         <p>
-            <a href="https://autode.sk/4dH3tOR">Autodesk Viewer</a>
+            21.05.2026 - Ubačene su sprinkler magistrale<br>
+            Kolizije su vidljive u komentarima unutar linka
         </p>
+        
+        <p>
+            <a href="https://autode.sk/4dH3tOR" class="viewer-link">Autodesk Viewer</a>
+        </p>
+
+        <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+            <h3 style="color: #888; font-size: 0.9rem; text-transform: uppercase;">Previous Versions</h3>
+            
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 8px;">
+                    <a href="https://autode.sk/3Rjhw5N" style="color: #666; font-size: 0.9rem;">Model od 19.05.2026</a>
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <a href="https://autode.sk/4fkPgtg" style="color: #666; font-size: 0.9rem;">Model od 18.05.2026</a>
+                </li>
+                <li style="margin-bottom: 8px;">
+                    <a href="https://autode.sk/3PCCsnG" style="color: #666; font-size: 0.9rem;">Model od 13.05.2026</a>
+                </li>
+            </ul>
+        </div>
     </div>
 
 </body>
