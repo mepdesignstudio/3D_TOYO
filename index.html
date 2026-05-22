@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="sr">
 <head>
-    <title>TOYO 3D</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOYO 3D | MEP Portal</title>
     <style>
         body {
             font-family: sans-serif;
@@ -9,14 +11,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 90vh;
+            min-height: 100vh; /* Changed to min-height for better scrolling on mobile */
             text-align: center;
             line-height: 1.6;
             margin: 0;
+            background-color: #ffffff;
         }
         .container {
-            max-width: 600px; /* Widened slightly for better text flow */
-            padding: 20px;
+            max-width: 650px; 
+            padding: 40px 20px;
         }
         .logo {
             max-width: 220px; 
@@ -24,54 +27,112 @@
             margin-bottom: 30px;
         }
         h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #000;
         }
-        p {
-            font-size: 1.1rem;
-            color: #333;
-            margin-bottom: 30px;
+        /* Update Notes Styling */
+        .updates-box {
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 35px;
+            font-size: 1rem;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #0696d7;
         }
-        /* This makes the link bigger and bolder */
+        .update-row {
+            display: flex;
+            align-items: flex-start;
+        }
+        .date-label {
+            font-weight: bold;
+            white-space: nowrap;
+            margin-right: 15px;
+            color: #000;
+        }
+        .notes-list {
+            color: #444;
+            line-height: 1.6;
+        }
+        /* Primary Link Styling */
         .viewer-link {
+            display: inline-block;
             color: #0696d7;
             font-weight: bold;
             text-decoration: underline;
-            font-size: 1.4rem; /* Making it a "shy bit" bigger */
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+        }
+        .viewer-link:hover {
+            color: #057fb5;
+        }
+        /* Archive Styling */
+        .archive-section {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+        }
+        .archive-title {
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .archive-item {
+            margin-bottom: 10px;
+        }
+        .archive-link {
+            color: #777;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        .archive-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="https://mepdesignstudio.com/images/mep-logo.png" alt="Company Logo" class="logo">
+        <img src="https://mepdesignstudio.com/images/mep-logo.png" alt="MEP Logo" class="logo">
 
         <h1>MEP.24.172 TOYO R&D</h1>
         
-        <p>
-            22.05.2026<br>
-            - Ubačene su unutrašnje jedinice VRF sistema<br>
-            - Izmene razvoda AHU2<br>
-            - Linijski difuzori su ukinuti i umesto njih stavljeni su TROX DLQ difuzori<br>
-            - Ubačena je kompletna sprinkler mreža - model Jovane L. (Vortex)
-        </p>
+        <div class="updates-box">
+            <div class="update-row">
+                <span class="date-label">22.05.2026 —</span>
+                <span class="notes-list">
+                    • Ubačene su unutrašnje jedinice VRF sistema<br>
+                    • Izmene razvoda AHU2<br>
+                    • Linijski difuzori ukinuti (zamenjeni TROX DLQ)<br>
+                    • Ubačena kompletna sprinkler mreža (Vortex model)
+                </span>
+            </div>
+        </div>
         
-        <p>
-            <a href="https://autode.sk/3Pxlqre" class="viewer-link">Autodesk Viewer</a>
-        </p>
+        <div>
+            <a href="https://autode.sk/3Pxlqre" class="viewer-link">Otvori Autodesk Viewer</a>
+        </div>
 
-        <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
-            <h3 style="color: #888; font-size: 0.9rem; text-transform: uppercase;">Prethodne verzije</h3>
-            
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 8px;">
-                    <a href="https://autode.sk/4dH3tOR" style="color: #666; font-size: 0.9rem;">Model od 19.05.2026</a>
+        <div class="archive-section">
+            <h3 class="archive-title">Prethodne verzije</h3>
+            <ul>
+                <li class="archive-item">
+                    <a href="https://autode.sk/4dH3tOR" class="archive-link">Model od 19.05.2026</a>
                 </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="https://autode.sk/3Rjhw5N" style="color: #666; font-size: 0.9rem;">Model od 18.05.2026</a>
+                <li class="archive-item">
+                    <a href="https://autode.sk/3Rjhw5N" class="archive-link">Model od 18.05.2026</a>
                 </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="https://autode.sk/4fkPgtg" style="color: #666; font-size: 0.9rem;">Model od 13.05.2026</a>
+                <li class="archive-item">
+                    <a href="https://autode.sk/4fkPgtg" class="archive-link">Model od 13.05.2026</a>
                 </li>
             </ul>
         </div>
