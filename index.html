@@ -21,30 +21,14 @@
             background-color: #ffffff;
         }
         .container {
-            max-width: 700px; 
+            max-width: 650px; 
             padding: 40px 20px;
         }
-
-        /* Partner Logo Line */
-        .partner-line {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
+        .logo {
+            max-width: 220px; 
+            height: auto;
+            margin-bottom: 30px;
         }
-        .partner-logo {
-            height: 35px; /* Unified height for a clean look */
-            width: auto;
-            display: block;
-        }
-        .logo-divider {
-            width: 1px;
-            height: 25px;
-            background-color: #eee;
-        }
-
         h1 {
             font-size: 1.8rem;
             margin-bottom: 5px;
@@ -65,7 +49,7 @@
             font-weight: bold;
             text-decoration: none;
             font-size: 1.4rem;
-            padding: 15px 35px;
+            padding: 15px 30px;
             border-radius: 8px;
             border: 1px solid #d0e8f7;
             transition: all 0.2s ease;
@@ -124,13 +108,7 @@
 <body>
 
     <div class="container">
-        <div class="partner-line">
-            <img src="https://mepdesignstudio.com/images/mep-logo.png" alt="MEP Logo" class="partner-logo">
-            <div class="logo-divider"></div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Toyo_Tire_logo.svg/1280px-Toyo_Tire_logo.svg.png" alt="Toyo Tires" class="partner-logo">
-            <div class="logo-divider"></div>
-            <img src="https://polocomm.com/wp-content/uploads/2023/03/Enegogroup-DP.png" alt="Energogroup" class="partner-logo">
-        </div>
+        <img src="https://mepdesignstudio.com/images/mep-logo.png" alt="MEP Logo" class="logo">
 
         <h1>MEP.24.172 TOYO R&D</h1>
 
@@ -140,4 +118,34 @@
         
         <div style="margin-bottom: 40px;">
             <p style="margin: 0;">
-                <a href
+                <a href="https://autode.sk/4nYELy9" class="viewer-button">Otvori Autodesk Viewer</a>
+            </p>
+            <p style="margin: 15px 0 0 0;">
+                <a href="https://drive.google.com/file/d/1TX9uRhiwgIM8bVAUMXwsdR4FaHLtiC0J/view?usp=sharing" class="aux-link">Preuzmi model u NWD formatu</a>
+            </p>
+        </div>
+
+        <div class="archive-section">
+            <h3 class="archive-title">Prethodna verzija</h3>
+            <ul>
+                <li class="archive-item">
+                    <a href="https://autode.sk/4nYzbvS" class="archive-link">Model od 26.05.2026</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const lastMod = new Date(document.lastModified);
+        const options = { 
+            day: '2-digit', 
+            month: '2-digit', 
+            year: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        };
+        document.getElementById('auto-time').innerHTML = lastMod.toLocaleDateString('sr-RS', options);
+    </script>
+
+</body>
+</html>
