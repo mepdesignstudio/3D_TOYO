@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="sr">
 <head>
@@ -17,7 +16,6 @@ HTML
             line-height: 1.6;
             margin: 0;
             background-color: #ffffff;
-            padding-bottom: 50px; /* Space for the automatic timestamp */
         }
         .container {
             max-width: 650px; 
@@ -30,20 +28,15 @@ HTML
         }
         h1 {
             font-size: 1.8rem;
-            margin-bottom: 25px;
+            margin-bottom: 5px; /* Reduced margin to bring timestamp closer */
             color: #000;
         }
-        /* Optimized Update Box: Centered text with padding */
-        .updates-box {
-            display: inline-block;
-            margin-bottom: 35px;
-            font-size: 1rem;
-            background: #f9f9f9;
-            padding: 20px 30px;
-            border-radius: 8px;
-            color: #444;
-            border: 1px solid #eee;
-            min-width: 280px;
+        /* New styling for the centered auto-timestamp */
+        .auto-timestamp {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 40px;
+            font-style: italic;
         }
         .viewer-link {
             display: inline-block;
@@ -64,7 +57,7 @@ HTML
             color: #057fb5;
         }
         .archive-section {
-            margin-top: 20px;
+            margin-top: 40px;
             border-top: 1px solid #eee;
             padding-top: 25px;
         }
@@ -91,15 +84,6 @@ HTML
         .archive-link:hover {
             text-decoration: underline;
         }
-        /* Automatic Corner Timestamp */
-        .corner-timestamp {
-            position: fixed;
-            bottom: 15px;
-            right: 20px;
-            font-size: 0.75rem;
-            color: #bbb;
-            font-style: italic;
-        }
     </style>
 </head>
 <body>
@@ -108,11 +92,9 @@ HTML
         <img src="https://mepdesignstudio.com/images/mep-logo.png" alt="MEP Logo" class="logo">
 
         <h1>MEP.24.172 TOYO R&D</h1>
-        
-        <div class="updates-box">
-            <strong>Poslednje ažuriranje 31.05.2026</strong><br>
-            Ubačene su sprinkler magistrale<br>
-            Izmene u koordinaciji sa arhitekturom
+
+        <div class="auto-timestamp">
+            Poslednje ažuriranje: <span id="auto-time"></span>
         </div>
         
         <div style="margin-bottom: 40px;">
@@ -134,13 +116,17 @@ HTML
         </div>
     </div>
 
-    <div class="corner-timestamp">
-        Stranica ažurirana: <span id="auto-time"></span>
-    </div>
-
     <script>
+        // Get the last modified date of the file
         const lastMod = new Date(document.lastModified);
-        const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+        const options = { 
+            day: '2-digit', 
+            month: '2-digit', 
+            year: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        };
+        // Display in Serbian format
         document.getElementById('auto-time').innerHTML = lastMod.toLocaleDateString('sr-RS', options);
     </script>
 
