@@ -73,10 +73,14 @@
             width: 100%;
             height: 1px;
             background-color: #eee;
-            margin: 20px 0 40px 0;
+            margin: 20px 0 0 0; /* No bottom margin here, handled by CTA container */
         }
 
-        /* Main Buttons */
+        /* Main CTA Buttons Container */
+        .cta-container {
+            padding: 40px 0; /* Equal spacing top and bottom */
+        }
+
         .viewer-button {
             display: inline-block;
             color: #0696d7;
@@ -88,28 +92,21 @@
             border-radius: 8px;
             border: 1px solid #d0e8f7;
             transition: all 0.2s ease;
+            width: 280px; /* Uniform width for both buttons */
         }
         .viewer-button:hover { 
             background-color: #e0f2fe; 
             transform: translateY(-2px); 
         }
-        
-        .aux-link { 
-            display: inline-block; 
-            color: #0696d7; 
-            text-decoration: none; 
-            font-size: 1.05rem; 
-            margin-top: 15px; 
-        }
-        .aux-link:hover { text-decoration: underline; }
 
         /* Archive Section */
         .archive-separator {
             width: 100%;
             height: 1px;
             background-color: #eee;
-            margin: 60px 0 25px 0;
+            margin: 0 0 25px 0;
         }
+        .archive-section { margin-top: 0; }
         .archive-title { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
         ul { list-style: none; padding: 0; margin: 0; }
         .archive-link { color: #777; font-size: 0.9rem; text-decoration: none; }
@@ -136,12 +133,12 @@
 
         <div class="separator"></div>
         
-        <div style="margin-bottom: 20px;">
+        <div class="cta-container">
             <p style="margin: 0;">
                 <a href="#" id="sheet-viewer-link" class="viewer-button">Učitavanje...</a>
             </p>
-            <p style="margin: 15px 0 0 0;">
-                <a href="#" id="sheet-nwd-link" class="aux-link">Preuzmi model u NWD formatu</a>
+            <p style="margin: 20px 0 0 0;">
+                <a href="#" id="sheet-nwd-link" class="viewer-button">Preuzmi .NWD</a>
             </p>
         </div>
 
@@ -187,7 +184,10 @@
                     btn.href = latestLink;
                     btn.innerHTML = "Otvori Autodesk Viewer";
                 }
-                if(nwdLink) document.getElementById('sheet-nwd-link').href = nwdLink;
+                if(nwdLink) {
+                    const nwdBtn = document.getElementById('sheet-nwd-link');
+                    nwdBtn.href = nwdLink;
+                }
                 if(prevLink && prevDate) {
                     const arc = document.getElementById('sheet-prev-link');
                     arc.href = prevLink;
