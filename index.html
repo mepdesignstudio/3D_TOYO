@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOYO 3D | MEP Portal</title>
+    
     <link rel="icon" type="image/png" href="https://mepdesignstudio.com/images/mep-logo.png">
+
     <style>
         body {
             font-family: sans-serif;
@@ -35,15 +37,14 @@
             display: block;
             object-fit: contain;
         }
-        /* Visual weight correction for Toyo */
-        img[alt="Toyo"] {
-            height: 18px; /* Specifically smaller height because it is very wide */
-        }
+        /* Visual weight correction for Toyo Tires */
+        img[alt="Toyo"] { height: 18px; }
         .logo-divider { width: 1px; height: 20px; background-color: #eee; }
 
         h1 { font-size: 1.8rem; margin-bottom: 5px; color: #000; }
         .auto-timestamp { font-size: 0.95rem; color: #666; margin-bottom: 45px; font-style: italic; }
         
+        /* Primary Button Style */
         .viewer-button {
             display: inline-block;
             color: #0696d7;
@@ -56,16 +57,40 @@
             border: 1px solid #d0e8f7;
             transition: all 0.2s ease;
         }
-        .viewer-button:hover { background-color: #e0f2fe; transform: translateY(-2px); }
+        .viewer-button:hover { 
+            background-color: #e0f2fe; 
+            transform: translateY(-2px); 
+        }
         
-        .aux-link { display: inline-block; color: #0696d7; text-decoration: none; font-size: 1.05rem; margin-top: 15px; }
+        /* Secondary Link Style */
+        .aux-link { 
+            display: inline-block; 
+            color: #0696d7; 
+            text-decoration: none; 
+            font-size: 1.05rem; 
+            margin-top: 15px; 
+        }
         .aux-link:hover { text-decoration: underline; }
 
+        /* Archive Styling */
         .archive-section { margin-top: 50px; border-top: 1px solid #eee; padding-top: 25px; }
         .archive-title { color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
         ul { list-style: none; padding: 0; margin: 0; }
         .archive-link { color: #777; font-size: 0.9rem; text-decoration: none; }
         .archive-link:hover { text-decoration: underline; }
+
+        /* Notification Toggle Styling */
+        #notify-btn {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 30px;
+            transition: color 0.3s;
+        }
+        #notify-btn:hover { color: #888; }
     </style>
 </head>
 <body>
@@ -100,38 +125,81 @@
                 <li><a href="#" id="sheet-prev-link" class="archive-link">Učitavanje...</a></li>
             </ul>
         </div>
+
+        <button id="notify-btn">Uključi obaveštenja o ažuriranju</button>
     </div>
 
     <script>
-        // Update with your CSV link
         const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQAgpgwqpGgd7oQ1Oo-pzEyk_TtP6_W3efClH3fQQgU2OMH7Ci8dA0Uy8xb01z-SdAlMP7nTp9dRLT6/pub?output=csv';
+        let currentViewerLink = "";
 
         function fetchSheetData() {
             fetch(sheetURL)
             .then(response => response.text())
             .then(data => {
                 const rows = data.split('\n');
-                const cells = rows[1].split(','); 
+                const delimiter = rows[1].includes(';') ? ';' : ',';
+                const cells = rows[1].split(delimiter); 
                 
-                if(cells[0]) {
+                const latestLink = cells[0]?.trim();
+                const nwdLink    = cells[1]?.trim();
+                const prevLink   = cells[2]?.trim();
+                const prevDate   = cells[3]?.trim();
+
+                // Check for update to trigger notification/refresh
+                if (currentViewerLink !== "" && currentViewerLink !== latestLink) {
+                    if (Notification.permission === "granted") {
+                        new Notification("Model je ažuriran!", {
+                            body: "Nova verzija projekta je dostupna.",
+                            icon: "https://mepdesignstudio.com/images/mep-logo.png"
+                        });
+                    }
+                    window.location.reload(); 
+                }
+                currentViewerLink = latestLink;
+
+                if(latestLink) {
                     const btn = document.getElementById('sheet-viewer-link');
-                    btn.href = cells[0].trim();
+                    btn.href = latestLink;
                     btn.innerHTML = "Otvori Autodesk Viewer";
                 }
-                if(cells[1]) document.getElementById('sheet-nwd-link').href = cells[1].trim();
-                if(cells[2] && cells[3]) {
+                if(nwdLink) document.getElementById('sheet-nwd-link').href = nwdLink;
+                if(prevLink && prevDate) {
                     const arc = document.getElementById('sheet-prev-link');
-                    arc.href = cells[2].trim();
-                    arc.innerHTML = `Model od ${cells[3].trim()}`;
+                    arc.href = prevLink;
+                    arc.innerHTML = `Model od ${prevDate}`;
                 }
             })
             .catch(err => console.error("Sheet Error:", err));
         }
 
+        // Initial Fetch
         fetchSheetData();
 
+        // Check for Sheet updates every 5 minutes
+        setInterval(fetchSheetData, 300000);
+
+        // Timestamp Logic
         const lastMod = new Date(document.lastModified);
-        document.getElementById('auto-time').innerHTML = lastMod.toLocaleDateString('sr-RS', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+        document.getElementById('auto-time').innerHTML = lastMod.toLocaleDateString('sr-RS', {
+            day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'
+        });
+
+        // Notification Logic
+        const notifyBtn = document.getElementById('notify-btn');
+        if (Notification.permission === "granted") notifyBtn.style.display = 'none';
+
+        notifyBtn.addEventListener('click', () => {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    new Notification("Obaveštenja aktivirana", {
+                        body: "Dobićete poruku kada se linkovi ažuriraju u tabeli.",
+                        icon: "https://mepdesignstudio.com/images/mep-logo.png"
+                    });
+                    notifyBtn.style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
