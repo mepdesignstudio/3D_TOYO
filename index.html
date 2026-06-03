@@ -67,10 +67,19 @@
             <button id="notify-btn">Uključi obaveštenja o ažuriranju</button>
         </div>
         <div class="separator"></div>
+        
         <div class="cta-container">
-            <p style="margin: 0;"><a href="#" id="sheet-viewer-link" class="viewer-button">Učitavanje...</a></p>
-            <p style="margin: 15px 0 0 0;"><a href="#" id="sheet-nwd-link" class="viewer-button">Preuzmi .NWD</a></p>
+            <p style="margin: 0;">
+                <a href="#" id="sheet-viewer-link" class="viewer-button">Učitavanje...</a>
+            </p>
+            <p style="margin: 15px 0 0 0;">
+                <a href="#" id="sheet-nwd-link" class="viewer-button">Preuzmi .NWD</a>
+            </p>
+            <p style="margin: 15px 0 0 0;">
+                <a href="#" id="sheet-clash-link" class="viewer-button" target="_blank">Otvori Clash Report</a>
+            </p>
         </div>
+        
         <div class="archive-separator"></div>
         <div class="archive-section">
             <h3 class="archive-title">Prethodna verzija</h3>
@@ -114,6 +123,7 @@
                 const prevLink   = cells[2]?.trim();
                 const prevDate   = cells[3]?.trim();
                 const sheetDate  = cells[4]?.trim();
+                const clashLink  = cells[5]?.trim(); // Kolona F
 
                 if(latestLink) {
                     const btn = document.getElementById('sheet-viewer-link');
@@ -127,6 +137,10 @@
                     arc.innerHTML = `Model od ${prevDate}`;
                 }
                 if(sheetDate) document.getElementById('auto-time').innerHTML = sheetDate;
+                
+                if(clashLink) {
+                    document.getElementById('sheet-clash-link').href = clashLink;
+                }
             })
             .catch(err => console.error("Sheet Error:", err));
         }
