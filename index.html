@@ -76,7 +76,7 @@
                 <a href="#" id="sheet-nwd-link" class="viewer-button">Preuzmi .NWD</a>
             </p>
             <p style="margin: 15px 0 0 0;">
-                <a href="#" id="sheet-clash-link" class="viewer-button" download>Clash Report</a>
+                <a href="#" id="sheet-clash-link" class="viewer-button" target="_blank">Clash Report</a>
             </p>
         </div>
         
@@ -139,11 +139,16 @@
                 if(sheetDate) document.getElementById('auto-time').innerHTML = sheetDate;
                 
                 if(clashLink) {
-                    // Pametna konverzija: Ako uneseš običan GDrive link za gledanje, 
-                    // skripta ga automatski pretvara u link za direktno preuzimanje (Direct Download)
-                    if (clashLink.includes("drive.google.com") && clashLink.includes("/file/d/")) {
-                        const fileId = clashLink.split("/file/d/")[1].split("/")[0];
-                        clashLink = `https://docs.google.com/uc?export=download&id=${fileId}`;
+                    // Ako je unet klasičan Google Drive link, automatski ga modifikujemo 
+                    // u čist "preview" format koji PDF momentalno otvara u browseru
+                    if (clashLink.includes("drive.google.com")) {
+                        if (clashLink.includes("/file/d/")) {
+                            const fileId = clashLink.split("/file/d/")[1].split("/")[0];
+                            clashLink = `https://drive.google.com/file/d/${fileId}/preview`;
+                        } else if (clashLink.includes("id=")) {
+                            const fileId = clashLink.split("id=")[1].split("&")[0];
+                            clashLink = `https://drive.google.com/file/d/${fileId}/preview`;
+                        }
                     }
                     document.getElementById('sheet-clash-link').href = clashLink;
                 }
