@@ -76,7 +76,7 @@
                 <a href="#" id="sheet-nwd-link" class="viewer-button">Preuzmi .NWD</a>
             </p>
             <p style="margin: 15px 0 0 0;">
-                <a href="#" id="sheet-clash-link" class="viewer-button" target="_blank">Otvori Clash Report</a>
+                <a href="#" id="sheet-clash-link" class="viewer-button" download>Preuzmi Clash Report</a>
             </p>
         </div>
         
@@ -123,7 +123,7 @@
                 const prevLink   = cells[2]?.trim();
                 const prevDate   = cells[3]?.trim();
                 const sheetDate  = cells[4]?.trim();
-                const clashLink  = cells[5]?.trim(); // Kolona F
+                let clashLink    = cells[5]?.trim(); // Kolona F
 
                 if(latestLink) {
                     const btn = document.getElementById('sheet-viewer-link');
@@ -139,6 +139,12 @@
                 if(sheetDate) document.getElementById('auto-time').innerHTML = sheetDate;
                 
                 if(clashLink) {
+                    // Pametna konverzija: Ako uneseš običan GDrive link za gledanje, 
+                    // skripta ga automatski pretvara u link za direktno preuzimanje (Direct Download)
+                    if (clashLink.includes("drive.google.com") && clashLink.includes("/file/d/")) {
+                        const fileId = clashLink.split("/file/d/")[1].split("/")[0];
+                        clashLink = `https://docs.google.com/uc?export=download&id=${fileId}`;
+                    }
                     document.getElementById('sheet-clash-link').href = clashLink;
                 }
             })
